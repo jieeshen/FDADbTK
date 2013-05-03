@@ -36,7 +36,7 @@ public class PubMedRef {
     public PubMedRef(String pmidString) throws Exception{
         //get an remote XML and transform to Document
         String urlString="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id="+pmidString+"&retmode=xml";
-        String path="C:\\JShen\\Research\\EDKB\\ER\\CTD\\newRef\\";
+        String path="E:\\Research\\EDKB\\DEAC\\130501_CTD\\addRef\\";
         URL xmlUrl= new URL(urlString);
 
 
@@ -77,7 +77,6 @@ public class PubMedRef {
                     if (authNode.getNodeType()== 1){
                         NodeList authName=authNode.getChildNodes();
                         String aname= authName.item(1).getTextContent()+", "+authName.item(3).getTextContent();
-                        System.out.println("----"+aname);
                         authors.add(aname);
                     }
 
@@ -89,49 +88,31 @@ public class PubMedRef {
                 parserNode(childnode);
             }else if(nodeType ==Node.TEXT_NODE){
                 if (tagName=="Year" && childnode.getParentNode().getParentNode().getNodeName()=="PubDate"){
-                    System.out.print(tagName+" : ");
-                    System.out.println(childnode.getNodeValue());
-                    year=childnode.getNodeValue();
+                     year=childnode.getNodeValue();
                 }
                 if (tagName=="Affiliation"){
-                    System.out.print(tagName+" : ");
-                    System.out.println(childnode.getNodeValue());
-                    affiliation=childnode.getNodeValue();
+                     affiliation=childnode.getNodeValue();
                 }
                 if (tagName=="ISOAbbreviation"){
-                    System.out.print(tagName+" : ");
-                    System.out.println(childnode.getNodeValue());
                     journal=childnode.getNodeValue();
                 }
                 if (tagName=="Volume"){
-                    System.out.print(tagName+" : ");
-                    System.out.println(childnode.getNodeValue());
-                    volume=childnode.getNodeValue();
+                     volume=childnode.getNodeValue();
                 }
                 if (tagName=="Issue"){
-                    System.out.print(tagName+" : ");
-                    System.out.println(childnode.getNodeValue());
                     issue=childnode.getNodeValue();
                 }
                 if (tagName=="MedlinePgn"){
-                    System.out.print(tagName+" : ");
-                    System.out.println(childnode.getNodeValue());
                     pgn=childnode.getNodeValue();
                 }
 
                 if (tagName=="ArticleTitle"){
-                    System.out.print(tagName+" : ");
-                    System.out.println(childnode.getNodeValue());
                     atitle=childnode.getNodeValue();
                 }
                 if (tagName=="AbstractText"){
-                    System.out.print(tagName+" : ");
-                    System.out.println(childnode.getNodeValue());
                     aabs=childnode.getNodeValue();
                 }
                 if (tagName=="ELocationID"){
-                    System.out.print(tagName+" : ");
-                    System.out.println(childnode.getNodeValue());
                     doi=childnode.getNodeValue();
                 }
 
@@ -144,14 +125,4 @@ public class PubMedRef {
             }
         }
     }
-
-    public static void main(String[] argv) throws Exception{
-        PubMedRef ref1=new PubMedRef("18992764");
-    }
-
-
-
-
-
-
 }
